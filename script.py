@@ -9,7 +9,6 @@ import pprint
 
 print "\nHi Shawn here is today's dashboard:\n"
 
-
 # 1. First function returns current weather in Boston, MA
 def weather(latitude,longitude):
     weather_api_key = '3faebebd5dd5b4b45f1280a39eec2e55'
@@ -24,7 +23,7 @@ def weather(latitude,longitude):
 
     boston_weather =  weather_data["currently"]["temperature"]
 
-    return "Boston Weather = {} degrees".format(boston_weather)
+    return "Boston Weather is {} degrees".format(boston_weather)
 
 print '------------------------------------'
 print weather('42.3601', '-71.0589')
@@ -33,7 +32,7 @@ print '------------------------------------'
 
 
 # 2. This function scrapes techcrunch api and returns top article
-print "\nHere is TechCrunch's Top Article...\n"
+print "\nHere is TechCrunch's Top 3 Articles...\n"
 def techcrunch_news():
 
     techcrunch_api_key = '8d6732ddb67d45ac881138c940cb2733'
@@ -50,7 +49,8 @@ def techcrunch_news():
     data = news_api_response.json()
 
     # returns top article
-    return data['articles'][0]['description']
-
+    print '1. ' + data['articles'][0]['description'] + '\n'
+    print '2. ' + data['articles'][1]['description'] + '\n'
+    print '3. ' + data['articles'][2]['description'] + '\n'
 
 print techcrunch_news()
