@@ -6,7 +6,7 @@ import urllib2
 import json
 import requests
 import pprint
-import scrape
+import scrape_cryptoprice
 
 weather_api_key = '3faebebd5dd5b4b45f1280a39eec2e55'
 wired_api_key = '8d6732ddb67d45ac881138c940cb2733'
@@ -27,30 +27,23 @@ def weather(latitude,longitude):
     boston_weather =  weather_data["currently"]["temperature"]
     boston_weather_summary = weather_data["currently"]["summary"]
 
-    return "Boston Weather is {} degrees and {}".format(boston_weather, boston_weather_summary)
+    return "Boston Weather is %s degrees and %s" % (boston_weather, boston_weather_summary)
 
 
 # 2. This function scrapes techcrunch api and returns top article
-def wired_news():
-
-    # url endpoint
-    wired_url = ('https://newsapi.org/v2/top-headlines?'
-           'sources=wired&'
-           'apiKey=8d6732ddb67d45ac881138c940cb2733')
+def get_news(url):
 
     # Asks api for data
-    news_api_response = requests.get(wired_url)
+    news_api_response = requests.get(url)
 
     # api responds with json
     data = news_api_response.json()
 
     # returns top article
-    article_one = data['articles'][0]['title']
-    article_two = data['articles'][1]['title']
-    article_three = data['articles'][2]['title']
+    article = data['articles'][0]['title']
+    article_description = data['articles'][0]['description']
 
-    return "1. {}\n\n2. {}\n\n3. {}\n".format(article_one, article_two, article_three)
-
+    return ("%s\n%s" % (article, article_description))
 
 
 # Function calls
@@ -59,9 +52,9 @@ print (weather('42.3601', '-71.0589'))
 print ('--------------------------------------------\n')
 
 print ('--------------------------------------------')
-print ("Litecoin Price Per Coin = {}".format(scrape.get_lp('https://coinmarketcap.com/currencies/litecoin/')))
-print ('--------------------------------------------')
+print ("Litecoin Price Per Coin = {}\n".format(scrape_cryptoprice.get_lp('https://coinmarketcap.com/currencies/litecoin/')))
+print ("Ripple XR Price Per Coin = {}".format(scrape_cryptoprice.get_xr('https://coinmarketcap.com/currencies/ripple/')))
+print ('--------------------------------------------\n')
 
-
-print "\n\nWired.com Top Articles\n"
-print wired_news()
+print "wired.com Top Article\n"
+print get_news('https://newsapi.org/v2/top-headlines?sources=wired&apiKey=c8109dec291d46ca9c2de6be910b7d01')
