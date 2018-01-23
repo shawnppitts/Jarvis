@@ -1,9 +1,8 @@
 # Jarvis
-Jarvis is my daily assistant who performs tasks such as:
-  - Giving me Bostons updated weather
-  - Telling me how long it will take to get to class
-  - Giving me Litecoin's and Ripple XR current value
-  - reading me the top article of wired.com
-  - Feature to come:
-      1. text-to-speech using IBM Watson
-      2. Run script at a fixed time everyday
+Jarvis helps perform multiple tasks and google searches I make everyday and format them in the command line. Jarvis performs tasks such as:
+  - Giving me the Boston weather
+  - Reading me Wired.com top article
+  - Scraping Coinbase.com for cryptocurrency price.
+  - Tells me how long it will take to commute to college
+  - Sends me a text of the weather every morning
+  - WIP: telling me the top spotify songs
