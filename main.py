@@ -1,13 +1,23 @@
+'''
+    Author: Shawn Pitts
+    Project: Jarvis 1.0
+    Project Description: Jarvis helps perform multiple tasks and google searches
+    I make everyday and format them in the command line. Jarvis performs
+    tasks such as giving me the Boston weather, giving me wired news, telling me the
+    price of crypto currencies, and telling me my commute time to college.
+'''
+
 # Python modules
 import urllib
 import json
 import requests
+import sys
 from twilio.rest import Client
+from clint.textui import colored
 
-# scripts imported
+# imported scripts
 import crypto_script
 import arrival_time
-
 
 # Function returns current weather in Boston, MA
 def get_boston_weather(boston_lat,boston_long):
@@ -27,6 +37,15 @@ def get_boston_weather(boston_lat,boston_long):
     weather_temp =  weather_response["currently"]["temperature"]
     weather_summary = weather_response["minutely"]["summary"]
 
+    # change text color depending on temperature
+    if (weather_temp <= 32):
+        weather_temp = colored.cyan(weather_temp)
+    elif (weather_temp >= 33 ):
+        weather_temp = colored.cyan(weather_temp)
+    else:
+        weather_temp = colored.yellow(weather_temp)
+
+
     return ("Bostons weather is %sF and %s" % (weather_temp, weather_summary.lower()))
 
 
@@ -35,11 +54,11 @@ def get_news():
 
     news_url = 'https://newsapi.org/v2/top-headlines?sources=wired&apiKey=c8109dec291d46ca9c2de6be910b7d01'
 
-    # Asks api for data
+    # requests api for data and responds with json
     news_request = urllib.urlopen(news_url)
     news_response = json.load(news_request)
 
-    # returns top article
+    # returns the top article from json response
     article = news_response['articles'][0]['title']
     article_description = news_response['articles'][0]['description']
 
@@ -55,6 +74,7 @@ def text_report():
 
     client = Client(account_sid, auth_token)
 
+    # message being sent to client
     message = client.messages.create(
         to="+16179849939",
         from_="+13392090722",
@@ -66,10 +86,9 @@ def text_report():
     )
 
 
-# The main function calls all functions and formats the CLI
-def main():
+# function calls run in same order of declaration
 
-    # text_report()
+def main():
 
     print ('\n----------------------------------------------------------')
     print (get_boston_weather('42.3601', '-71.0589'))
