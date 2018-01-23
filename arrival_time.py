@@ -10,6 +10,6 @@ def rockland_to_quincy():
     eta_request = urllib.urlopen(endpoint_url)
     eta_response = json.load(eta_request)
 
-    final_eta = eta_response['routes'][0]['legs'][0]['duration']['text']
+    final_eta = eta_response['routes'][0]['legs'][0]['duration_in_traffic']['text']
 
     return final_eta
