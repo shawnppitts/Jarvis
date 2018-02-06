@@ -38,9 +38,9 @@ def get_boston_weather(boston_lat,boston_long):
     weather_summary = weather_response["minutely"]["summary"]
 
     # change text color depending on temperature
-    if (weather_temp <= 32):
+    if (weather_temp <= 32.5):
         weather_temp = colored.cyan(weather_temp)
-    elif (weather_temp >= 33 ):
+    elif (weather_temp >= 33):
         weather_temp = colored.cyan(weather_temp)
     else:
         weather_temp = colored.yellow(weather_temp)
@@ -95,10 +95,12 @@ def main():
     print ('----------------------------------------------------------\n')
 
     print ('-------------------------------------------------')
-    print ("It will take you {} to get to Quincy College".format(arrival_time.rockland_to_quincy()))
+    print ("Commute to Quincy College is {}".format(arrival_time.rockland_to_quincy()))
+    print ("Commute to Mom and Dads is {}".format(arrival_time.rockland_to_boston()))
     print ('-------------------------------------------------\n')
 
     print ('------------------------------------')
+    print ('Bitcoin Price Per Coin = {}\n'.format(crypto_script.get_bitcoin_price_from()))
     print ("Litecoin Price Per Coin = {}\n".format(crypto_script.get_litecoin_price_from()))
     print ("Ripple XR Price Per Coin = {}".format(crypto_script.get_xr_price_from()))
     print ('------------------------------------\n')
@@ -107,4 +109,5 @@ def main():
     print (get_news())
 
 
-print (main())
+if __name__ == "__main__":
+    main()
